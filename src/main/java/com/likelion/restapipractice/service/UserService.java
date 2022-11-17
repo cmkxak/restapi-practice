@@ -25,10 +25,10 @@ public class UserService {
     }
 
     public UserResponseDTO save(UserRequestDTO userRequestDTO) {
-        Optional<User> findUserByUserName = userRepository.findByUsernameContains(userRequestDTO.getUsername());
+        Optional<User> selectedUserByUserName = userRepository.findByUsernameContains(userRequestDTO.getUsername());
 
-        if(!findUserByUserName.isEmpty()){
-            return new UserResponseDTO(findUserByUserName.get().getUsername(), "해당 id는 중복입니다.");
+        if(!selectedUserByUserName.isEmpty()){
+            return new UserResponseDTO(selectedUserByUserName.get().getUsername(), "해당 id는 중복입니다.");
         }
 
         User savedUser = userRepository.save(userRequestDTO.toEntity());
