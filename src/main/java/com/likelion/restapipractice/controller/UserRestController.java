@@ -5,7 +5,6 @@ import com.likelion.restapipractice.domain.dto.UserResponseDTO;
 import com.likelion.restapipractice.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -21,9 +20,9 @@ public class UserRestController {
         return ResponseEntity.ok().body(userResponseDTO);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserRequestDTO userRequestDTO, @PathVariable Long id){
-        UserResponseDTO userResponseDTO = userService.save(userRequestDTO, id);
+    @PostMapping()
+    public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserRequestDTO userRequestDTO){
+        UserResponseDTO userResponseDTO = userService.save(userRequestDTO);
         return ResponseEntity.ok().body(userResponseDTO);
     }
 }
