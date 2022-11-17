@@ -22,8 +22,8 @@ public class UserRestController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserRequestDTO userRequestDTO){
-        UserResponseDTO userResponseDTO = userService.save(userRequestDTO);
+    public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserRequestDTO userRequestDTO, @PathVariable Long id){
+        UserResponseDTO userResponseDTO = userService.save(userRequestDTO, id);
         return ResponseEntity.ok().body(userResponseDTO);
     }
 }

@@ -24,7 +24,13 @@ public class UserService {
         return new UserResponseDTO(user.getId(), user.getUsername(), "");
     }
 
-    public UserResponseDTO save(UserRequestDTO userRequestDTO) {
+    public UserResponseDTO save(UserRequestDTO userRequestDTO, Long id) {
+        Optional<User> optUser = userRepository.findById(id);
+
+        if(!optUser.isEmpty()){
+            return new UserResponseDTO(optUser.get().getUsername(), "해당 id는 중복입니다.");
+        }
+
         User savedUser = userRepository.save(userRequestDTO.toEntity());
         return new UserResponseDTO(savedUser.getUsername(), "가입이 완료되었습니다.");
     }
